@@ -5,7 +5,7 @@ import { COLUMNS } from "./columns";
 import './table.css'
 
 export const BasicTable = () => {
-    
+
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => MOCK_DATA, []);
 
@@ -52,6 +52,16 @@ export const BasicTable = () => {
             )
           })}
         </tbody>
+
+        <tfoot>
+          {footerGroups.map(footerGroup => (
+            <tr {...footerGroup.getFooterGroupProps()}>
+              {footerGroup.headers.map(column => (
+                <td {...column.getFooterProps()}>{column.render('Footer')}</td>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
 
       </table>
     </>
