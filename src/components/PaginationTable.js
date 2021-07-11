@@ -30,6 +30,7 @@ export const PaginationTable = () => {
     pageOptions,
     gotoPage,
     pageCount,
+    setPageSize,
     state,
     prepareRow,
   } = tableInstance;
@@ -68,6 +69,17 @@ export const PaginationTable = () => {
       </table>
 
       <div>
+
+      <select // for page size choice
+          value={pageSize}
+          onChange={e => setPageSize(Number(e.target.value))}>
+          {[10, 25, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {"<<"}
         </button>
