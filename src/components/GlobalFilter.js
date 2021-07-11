@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAsyncDebounce } from "react-table";
 
 export const GlobalFilter = ({ filter, setFilter }) => {
+  const [value, setValue] = useState(filter);
+  const onChange = useAsyncDebounce((value) => {
+    setFilter(value || undefined);
+  }, 1000);
+
   return (
     <span>
       Search:{" "}
       <input
-        value={filter || ""}
+        value={value || ""}
         onChange={(e) => {
-          setFilter(e.target.value);
+          setValue(e.target.value);
+          onChange(e.target.value);
         }}
       />
     </span>
